@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Remédios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Barra superior */
+        .topbar {
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            padding: 25px;
+            z-index: 2000;
+        }
+
+        /* Botão do menu em caixinha */
+        .menu-btn {
+            background-color: #444;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 6px;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            user-select: none;
+        }
+
+        /* Menu lateral */
+        .sidebar {
+            position: fixed;
+            left: -200px; /* escondido inicialmente */
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #444;
+            padding-top: 60px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #666;
+        }
+
+        .sidebar.show {
+            left: 0; /* aparece */
+        }
+
+        /* Estilo tabelas */
+        table {
+            width: 100%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            margin: 20px auto;
+            table-layout: auto;
+            background: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-top: 40px;
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.5);
+            margin: 5px 0 5px 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* RESPONSIVO PARA MOBILE */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                background-color: #fff;
+            }
+
+            td {
+                border: none;
+                padding: 5px 0;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td::before {
+                position: absolute;
+                top: 50%;
+                left: 10px;
+                transform: translateY(-50%);
+                white-space: nowrap;
+                font-weight: bold;
+            }
+
+            td:nth-child(1)::before { content: "Nome"; }
+            td:nth-child(2)::before { content: "Horário e dose"; }
+            td:nth-child(3)::before { content: "Horário 2 e dose"; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barra superior -->
+<div class="topbar">
+    <div class="menu-btn" onclick="toggleMenu()">&#9776; Menu</div>
+</div>
+
+<!-- Menu lateral -->
+<div id="sidebar" class="sidebar">
+    <a href="http://127.0.0.1:5500/index.html">Início</a>
+    <a href="http://127.0.0.1:5500/remedios.html">Horário dos remédios</a>
+    <a href="#">Cuidador responsável</a>
+    <a href="#">Remédios disponíveis</a>
+</div>
+
+<!-- Conteúdo principal -->
+<h1>Áurea</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Horário e dose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Apixabana 5 mg</td><td>Meio comprimido a Manhã<input type="checkbox"></td></tr>
+        <tr><td>Indapamida 1,5 mg</td><td>1 comprimido a Manhã<input type="checkbox"></td></tr>
+        <tr><td>Tartarato de metoprolol 100 mg</td><td>1 comprimido a Manhã<input type="checkbox"></td></tr>
+        <tr><td>Betadine</td><td>1 comprimido a Manhã<input type="checkbox"></td></tr>
+        <tr><td>Lavitan</td><td>1 comprimido Antes do almoço<input type="checkbox"></td></tr>
+        <tr><td>Luvis</td><td>1 comprimido Após o almoço<input type="checkbox"></td></tr>
+        <tr><td>Mirtazapina 15 mg</td><td>Meio comprimido a Noite<input type="checkbox"></td></tr>
+        <tr><td>Hemifumarato de quetiapina 25 mg</td><td>1 comprimido a Noite<input type="checkbox"></td></tr>
+        <tr><td>Cloridrato de memantina 10 mg</td><td>1 comprimido a Noite<input type="checkbox"></td></tr>
+        <tr><td>Citrato de cálcio + vitamina D3 + K2 + magnésio</td><td>2 comprimidos a Manhã<input type="checkbox"></td></tr>
+        <tr><td>Repoflor</td><td>Quando necessário<input type="checkbox"></td></tr>
+    </tbody>
+</table>
+
+<h1>Alcido</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Horário 1 e dose</th>
+            <th>Horário 2 e dose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Anoro</td><td>1 jato a Noite<input type="checkbox"></td><td></td></tr>
+        <tr><td>Carvediol 5.35mg</td><td>1 comprimido a Manhã<input type="checkbox"></td><td>1 comprimido a Noite<input type="checkbox"></td></tr>
+        <tr><td>Lixiana 30mg</td><td>1 comprimido a Noite<input type="checkbox"></td><td></td></tr>
+        <tr><td>Indapamida 1.5mg</td><td>1 comprimido a Manhã<input type="checkbox"></td><td></td></tr>
+        <tr><td>Alopurinal 100mg</td><td>1 comprimido a Manhã<input type="checkbox"></td><td></td></tr>
+        <tr><td>Prednisolona</td><td>1 comprimido a Manhã<input type="checkbox"></td><td>Meio comprimido a Noite<input type="checkbox"></td></tr>
+        <tr><td>Colchicina 0.5mg</td><td>1 comprimido a Manhã<input type="checkbox"></td><td>1 comprimido a Noite<input type="checkbox"></td></tr>
+        <tr><td>Paracetamol</td><td>1 comp a cada 6h 1<input type="checkbox"> 2<input type="checkbox"> 3<input type="checkbox"> 4<input type="checkbox"></td><td></td></tr>
+        <tr><td>Lisador 1g</td><td>1 comp a cada 6h 1<input type="checkbox"> 2<input type="checkbox"> 3<input type="checkbox"> 4<input type="checkbox"></td><td></td></tr>
+        <tr><td>Palexis</td><td>1 comp a cada 12h 1<input type="checkbox"> 2<input type="checkbox"></td><td></td></tr>
+        <tr><td>Duloxetina 30mg</td><td>1 comp a cada 12h 1<input type="checkbox"> 2<input type="checkbox"></td><td></td></tr>
+        <tr><td>Furosemida 40mg</td><td>1 comp a Manhã<input type="checkbox"></td><td>1 ao Meio dia<input type="checkbox"></td></tr>
+        <tr><td>Colágeno</td><td>1 comp a Noite<input type="checkbox"></td><td></td></tr>
+        <tr><td>Citrato de cálcio + vit D3 + K2 + Mg</td><td>2 comp a Manhã<input type="checkbox"></td><td></td></tr>
+        <tr><td>Leite de magnésia</td><td>Quando necessário<input type="checkbox"></td><td></td></tr>
+    </tbody>
+</table>
+
+<script>
+    function toggleMenu() {
+        document.getElementById("sidebar").classList.toggle("show");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        function salvarEstado() {
+            const estado = {};
+            checkboxes.forEach((chk, index) => {
+                estado[index] = chk.checked;
+            });
+            const hoje = new Date().toDateString();
+            localStorage.setItem('estadoCheckboxes', JSON.stringify(estado));
+            localStorage.setItem('dataSalva', hoje);
+        }
+
+        function carregarEstado() {
+            const dataSalva = localStorage.getItem('dataSalva');
+            const hoje = new Date().toDateString();
+
+            if (dataSalva === hoje) {
+                const estado = JSON.parse(localStorage.getItem('estadoCheckboxes')) || {};
+                checkboxes.forEach((chk, index) => {
+                    chk.checked = estado[index] || false;
+                });
+            } else {
+                localStorage.removeItem('estadoCheckboxes');
+                localStorage.setItem('dataSalva', hoje);
+            }
+        }
+
+        checkboxes.forEach(chk => chk.addEventListener('change', salvarEstado));
+        carregarEstado();
+    });
+</script>
+
+</body>
+</html>
+

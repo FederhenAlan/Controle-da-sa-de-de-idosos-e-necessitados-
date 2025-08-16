@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Lateral</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Barra superior */
+    .topbar {
+        background-color: #333;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* centraliza o título */
+        position: sticky;        /* fica no topo ao rolar */
+        top: 0;
+        padding: 20px;
+        z-index: 2000;           /* >>> acima da sidebar para o botão ficar clicável */
+    }
+
+    /* Título centralizado */
+    .topbar h1 {
+        margin: 0;
+        font-size: 20px;
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+    /* Botão do menu em caixinha, alinhado à esquerda */
+    .menu-btn {
+        background-color: #444;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 15px;
+        border-radius: 6px;
+        position: absolute;  /* permite posicionar à esquerda dentro da topbar */
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        user-select: none;
+    }
+
+    /* Menu lateral */
+    .sidebar {
+        position: fixed;
+        left: -200px; /* escondido inicialmente */
+        top: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #444;
+        padding-top: 60px;
+        transition: left 0.3s ease;
+        z-index: 1000;  /* abaixo da topbar */
+    }
+
+    .sidebar a {
+        display: block;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    .sidebar a:hover {
+        background-color: #666;
+    }
+
+    .sidebar.show {
+        left: 0; /* aparece */
+    }
+
+    /* Conteúdo principal */
+    .content {
+        padding: 20px;
+    }
+
+    section {
+        text-align: center;
+        max-width: 80%;   /* corrigido: antes estava "max width" */
+        background-color: #FFFFFF;
+        margin: auto;
+    }
+
+    h1{
+        font-family: Arial, sans-serif;
+        color: #333;
+        font-size: 24px;
+    }
+</style>
+</head>
+<body>
+
+<!-- Barra superior com título e botão -->
+<div class="topbar">
+    <div class="menu-btn" onclick="toggleMenu()">&#9776; Menu</div>
+    <h1>Cuidado com o idoso</h1>
+</div>
+
+<!-- Menu lateral -->
+<div id="sidebar" class="sidebar">
+    <a href="http://127.0.0.1:5500/index.html">Início</a>
+    <a href="http://127.0.0.1:5500/remedios.html">Horário dos remédios</a>
+    <a href="#">Cuidador responsável</a>
+    <a href="#">Remédios e quantidade disponível</a>
+</div>
+
+<!-- Conteúdo principal -->
+<section>
+    <div class="content">
+        <h1><strong>Site para cuidado e controle da saúde de idosos</strong></h1>
+        <p>Conteúdo do site...</p>
+    </div>
+</section>
+
+<script>
+    function toggleMenu() {
+        document.getElementById("sidebar").classList.toggle("show");
+    }
+</script>
+
+</body>
+</html>
